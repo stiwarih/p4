@@ -20,3 +20,24 @@ Route::get('/user-generator',       'HomeController@goUserDef');
 Route::post('/user-generator',      'HomeController@goUserPost');
 Route::get('/password-generator',   'HomeController@goPassDef');
 Route::post('/password-generator',  'HomeController@goPassPost');
+//DATA BASE check - debug
+Route::get('/debug',                'HomeController@debug');
+
+//auth routes
+# Show login form
+Route::get('/login-test',           function()
+{
+    return View::make('login');
+});
+Route::get('/login',                'Auth\AuthController@getLogin');
+# Process login form
+Route::post('/login',               'Auth\AuthController@postLogin');
+# Process logout
+Route::get('/logout',               'Auth\AuthController@getLogout');
+# Show registration form
+Route::get('/register',             'Auth\AuthController@getRegister');
+# Process registration form
+Route::post('/register',            'Auth\AuthController@postRegister');
+
+
+?>
