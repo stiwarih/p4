@@ -7,10 +7,12 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "badcow/lorem-ipsum": "dev-master",
-        "fzaninotto/faker": "^1.5"
+        "barryvdh/laravel-debugbar": "^2.0",
+        "rych/random": "dev-master",
+        "rap2hpoutre/laravel-log-viewer": "^0.4.3"
     },
     "require-dev": {
+        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1"

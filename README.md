@@ -1,10 +1,10 @@
-# P3: Developer's Best Friend
+# P4: Code Quality Monitor
 
 ## Live URL
-<http://p3.stiwari.me>
+<http://p4.stiwari.me>
 
 ## Github URL
-<https://github.com/stiwarih/p3>
+<https://github.com/stiwarih/p4>
 
 ## Description
 This provide access to two popular tools for Random Text and User generator using configurable inputs. In addition a third tool provide user an easy access to random user.
