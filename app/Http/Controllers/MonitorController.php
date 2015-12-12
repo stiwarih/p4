@@ -27,7 +27,7 @@ class MonitorController extends Controller {
         }
         return 'hi';
         */
-        $branches = \App\CodeEntry::orderBy('id','DESC')->get();
+        $codes = \App\CodeEntry::orderBy('id','DESC')->get();
         $approved = \App\Approval::orderBy('id','DESC')->get();
         $testrun = \App\TestRun::orderBy('id','DESC')->get();
         //dd($monitor);
@@ -37,13 +37,13 @@ class MonitorController extends Controller {
         //    echo $m['id']. ", " . $m['last_sha']. ", " .$m['comments'] ."<br>";
         //}
             //dump($monitor->toArray());
-        return view('monitor.index2')->with('codes',$branches);
+        return view('monitor.index')->with('codes',$codes);
     }
 
     /**
     * Responds to requests to GET /monitor/edit/{$id}
     */
-    public function getCodeUpdate($id = null) {
+    public function getCodeCreateUpdate($id = null) {
 
         $code = \App\CodeEntry::find($id);
         $test = \App\TestRun::orderby('id','ASC')->get();
@@ -54,7 +54,13 @@ class MonitorController extends Controller {
             return redirect('\code');
         }
 
-        return view('monitor.edit')->with('code', $code);
+        return view('monitor.createupdatecode')->with('code', $code);
+    }
+
+    public function postCodeCreateUpdate(Request $request) {
+        \Session::flash('flash_message','Your code monitor was updated.');
+        return redirect('/monitor/createupdatecode/'.$request->id);
+
     }
 
     public function getEdit($id = null) {
