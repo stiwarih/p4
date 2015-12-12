@@ -24,7 +24,7 @@
                 id='comments'
                 name="comments"
                 value='{{$approval->comments}}'
-                >
+            >
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Save changes</button>

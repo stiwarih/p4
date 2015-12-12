@@ -109,6 +109,7 @@ class MonitorController extends Controller {
     public function getApprovalCreateUpdate($id = null) {
 
         $approval = \App\Approval::find($id);
+
         if(is_null($approval)) {
             \Session::flash('flash_message','Approval not found.');
             return redirect('/monitor');
@@ -119,8 +120,8 @@ class MonitorController extends Controller {
 
     public function postApprovalCreateUpdate(Request $request) {
 
-        $approval = \App\TestRun::find($request->id);
-        dump($approval);
+        $approval = \App\Approval::find($request->id);
+
         $approval->comments = $request->comments;
         $approval->save();
 
