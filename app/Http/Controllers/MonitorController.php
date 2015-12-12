@@ -50,14 +50,22 @@ class MonitorController extends Controller {
         $approval = \App\Approval::orderby('id','ASC')->get();
 
         if(is_null($code)) {
-            \Session::flash('flash_message','Book not found.');
-            return redirect('\code');
+            \Session::flash('flash_message','Code Entry not found.');
+            return redirect('/monitor');
         }
 
         return view('monitor.createupdatecode')->with('code', $code);
     }
 
     public function postCodeCreateUpdate(Request $request) {
+
+        $code = \App\CodeEntry::find($request->id);
+
+        $code->branch_name = $request->branch_name;
+        $code->last_sha = $request->last_sha;
+        $code->comments = $request->comments;
+        $code->save();
+
         \Session::flash('flash_message','Your code monitor was updated.');
         return redirect('/monitor/createupdatecode/'.$request->id);
 

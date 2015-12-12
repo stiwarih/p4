@@ -17,25 +17,34 @@
 
         <input type='hidden' name='id' value='{{ $code->id }}'>
         <div class='form-group'>
-            <label>* Title:</label>
+            <label>* Branch Name:</label>
             <input
                 type='text'
-                id='title'
-                name='title'
+                id='branch_name'
+                name='branch_name'
                 value='{{$code->branch_name}}'
             >
         </div>
 
         <div class='form-group'>
-            <label for='title'>* Cover (URL):</label>
+            <label for='last_sha'>* Last Sha (URL):</label>
             <input
                 type='text'
-                id='cover'
-                name="cover"
-                value='{{$code->sha1}}'
+                id='last_sha'
+                name="last_sha"
+                value='{{$code->last_sha}}'
                 >
         </div>
 
+        <div class='form-group'>
+            <label for='comments'>* Last Sha (URL):</label>
+            <input
+                type='text'
+                id='comments'
+                name="comments"
+                value='{{$code->comments}}'
+                >
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Save changes</button>
     </form>
