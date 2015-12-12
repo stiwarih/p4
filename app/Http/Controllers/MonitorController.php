@@ -106,6 +106,33 @@ class MonitorController extends Controller {
 
     }
 
+    public function getApprovalCreateUpdate($id = null) {
+
+        $approval = \App\Approval::find($id);
+        if(is_null($approval)) {
+            \Session::flash('flash_message','Approval not found.');
+            return redirect('/monitor');
+        }
+
+        return view('monitor.createupdateapproval')->with('approval', $approval);
+    }
+
+    public function postApprovalCreateUpdate(Request $request) {
+
+        $approval = \App\TestRun::find($request->id);
+        dump($approval);
+        $approval->comments = $request->comments;
+        $approval->save();
+
+        $code = \App\CodeEntry::find(\Session::get('code_id'));
+        $code->approval_id = $request->id;
+        $code->save();
+
+        \Session::flash('flash_message','Your Approval was updated.');
+        return redirect('/monitor/createupdateapproval/'.$request->id);
+
+    }
+
     public function getEdit($id = null) {
 
         $branch = \App\CodeEntry::find($id);

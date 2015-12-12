@@ -52,11 +52,13 @@ Route::get('/', 'MonitorController@getIndex');
 Route::get('/monitor/show/{branch_name?}', 'MonitorController@getShow');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/monitor',                          'MonitorController@getIndex');
-    Route::get('/monitor/createupdatecode/{id?}',   'MonitorController@getCodeCreateUpdate');
-    Route::post('/monitor/createupdatecode',        'MonitorController@postCodeCreateUpdate');
-    Route::get('/monitor/createupdatetest/{id?}',   'MonitorController@getTestCreateUpdate');
-    Route::post('/monitor/createupdatetest',        'MonitorController@postTestCreateUpdate');
+    Route::get('/monitor',                              'MonitorController@getIndex');
+    Route::get('/monitor/createupdatecode/{id?}',       'MonitorController@getCodeCreateUpdate');
+    Route::post('/monitor/createupdatecode',            'MonitorController@postCodeCreateUpdate');
+    Route::get('/monitor/createupdatetest/{id?}',       'MonitorController@getTestCreateUpdate');
+    Route::post('/monitor/createupdatetest',            'MonitorController@postTestCreateUpdate');
+    Route::get('/monitor/createupdateapproval/{id?}',   'MonitorController@getApprovalCreateUpdate');
+    Route::post('/monitor/createupdateapproval',        'MonitorController@postApprovalCreateUpdate');
 
     //in theory
     Route::get('/monitor/create',      'MonitorController@getCreate');

@@ -21,7 +21,7 @@ class CreateApprovalsTable extends Migration
             # The rest of the fields...
             $table->string('comments');
             $table->integer('approver_id');
-            $table->integer('test_run_id');
+            //$table->integer('test_run_id');
         });
     }
 

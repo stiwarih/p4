@@ -18,7 +18,7 @@ such as a page specific styesheets.
 
 @section('content')
 
-    <h1>Add a new book</h1>
+    <h1>Add a new Code Entry</h1>
 
     @include('errors')
 
@@ -76,7 +76,41 @@ such as a page specific styesheets.
                 >
         </div>
 
-        <button type="submit" class="btn btn-primary">Add book</button>
+
+
+//
+<input type='hidden' name='id' value='{{ $code->id }}'>
+<div class='form-group'>
+    <label>* Branch Name:</label>
+    <input
+        type='text'
+        id='branch_name'
+        name='branch_name'
+        value='{{$code->branch_name}}'
+    >
+</div>
+
+<div class='form-group'>
+    <label for='last_sha'>* Last Sha:</label>
+    <input
+        type='text'
+        id='last_sha'
+        name="last_sha"
+        value='{{$code->last_sha}}'
+        >
+</div>
+
+<div class='form-group'>
+    <label for='comments'>Comments:</label>
+    <input
+        type='text'
+        id='comments'
+        name="comments"
+        value='{{$code->comments}}'
+        >
+</div>
+
+        <button type="submit" class="btn btn-primary">Add Code Entry</button>
     </form>
 
 @stop

@@ -15,7 +15,6 @@ such as a page specific styesheets.
 @stop
 
 
-
 @section('content')
 
     @if(!isset($branch_name))
