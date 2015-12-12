@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/monitor',                          'MonitorController@getIndex');
     Route::get('/monitor/createupdatecode/{id?}',   'MonitorController@getCodeCreateUpdate');
     Route::post('/monitor/createupdatecode',        'MonitorController@postCodeCreateUpdate');
+    Route::get('/monitor/createupdatetest/{id?}',   'MonitorController@getTestCreateUpdate');
+    Route::post('/monitor/createupdatetest',        'MonitorController@postTestCreateUpdate');
 
     //in theory
     Route::get('/monitor/create',      'MonitorController@getCreate');

@@ -49,11 +49,14 @@ class MonitorController extends Controller {
         $test = \App\TestRun::orderby('id','ASC')->get();
         $approval = \App\Approval::orderby('id','ASC')->get();
 
+        \Session::put('code_id',$id);
+        //dump(\Session::get('code_id'));
+
         if(is_null($code)) {
             \Session::flash('flash_message','Code Entry not found.');
             return redirect('/monitor');
         }
-
+        //$request->session()->put('code_id',$id);
         return view('monitor.createupdatecode')->with('code', $code);
     }
 
@@ -68,6 +71,38 @@ class MonitorController extends Controller {
 
         \Session::flash('flash_message','Your code monitor was updated.');
         return redirect('/monitor/createupdatecode/'.$request->id);
+
+    }
+
+    public function getTestCreateUpdate($id = null) {
+
+        $test = \App\TestRun::find($id);
+        //$code = \App\CodeEntry::find(\Session::id);
+
+        //dump(\Session::get('code_id'));
+        if(is_null($test)) {
+            \Session::flash('flash_message','Test not found.');
+            return redirect('/monitor');
+        }
+
+        return view('monitor.createupdatetest')->with('test', $test);
+    }
+
+    public function postTestCreateUpdate(Request $request) {
+
+        $test = \App\TestRun::find($request->id);
+
+        $test->passed = $request->passed;
+        $test->comments = $request->comments;
+        $test->merged_up_to_master = $request->merged;
+        $test->save();
+
+        $code = \App\CodeEntry::find(\Session::get('code_id'));
+        $code->test_run_id = $request->id;
+        $code->save();
+
+        \Session::flash('flash_message','Your Test was updated.');
+        return redirect('/monitor/createupdatetest/'.$request->id);
 
     }
 

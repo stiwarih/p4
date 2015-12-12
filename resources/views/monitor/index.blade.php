@@ -23,7 +23,7 @@ li {
                 <li><img src='{{ $code->last_sha }}'><a href='/monitor/createupdatecode/{{$code->approval_id}}'>Aprroval</a></li>
                 <li><a href="/html/default.asp" target="_blank">HTML</a></li>
                 <li><a href="/css/default.asp" target="_blank">CSS</a></li>
-                <li><a href='/monitor/createupdatecode/{{$code->id}}&testid={{$code->test_run_id}}&approvalid={{$code->approval_id}}'>Tested</a><br></li>
+                <li><a href='/monitor/createupdatetest/{{$code->test_run_id}}'>Tested</a><br></li>
             </ul>
             </div>
         </div>

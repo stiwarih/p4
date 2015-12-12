@@ -27,7 +27,7 @@
         </div>
 
         <div class='form-group'>
-            <label for='last_sha'>* Last Sha (URL):</label>
+            <label for='last_sha'>* Last Sha:</label>
             <input
                 type='text'
                 id='last_sha'
@@ -37,7 +37,7 @@
         </div>
 
         <div class='form-group'>
-            <label for='comments'>* Last Sha (URL):</label>
+            <label for='comments'>Comments:</label>
             <input
                 type='text'
                 id='comments'
