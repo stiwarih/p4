@@ -47,11 +47,11 @@ Route::get('/confirm-login-worked', function() {
 /*----------------------------------------------------
 /monitor
 -----------------------------------------------------*/
-Route::get('/', 'MonitorController@getIndex');
 
 Route::get('/monitor/show/{branch_name?}', 'MonitorController@getShow');
 
 Route::group(['middleware' => 'auth'], function() {
+    Route::get('/',                                     'MonitorController@getIndex');
     Route::get('/monitor',                              'MonitorController@getIndex');
     Route::get('/monitor/createupdatecode/{id?}',       'MonitorController@getCodeCreateUpdate');
     Route::post('/monitor/createupdatecode',            'MonitorController@postCodeCreateUpdate');
@@ -59,7 +59,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/monitor/createupdatetest',            'MonitorController@postTestCreateUpdate');
     Route::get('/monitor/createupdateapproval/{id?}',   'MonitorController@getApprovalCreateUpdate');
     Route::post('/monitor/createupdateapproval',        'MonitorController@postApprovalCreateUpdate');
+    Route::get('/input',                                'MonitorController@inputSelector');
 
+    
     //in theory
     Route::get('/monitor/create',      'MonitorController@getCreate');
     Route::post('/monitor/create',     'MonitorController@postCreate');

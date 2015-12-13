@@ -27,9 +27,17 @@ class MonitorController extends Controller {
         }
         return 'hi';
         */
+
+        //\Session::put('user_id', \Auth::id());
         $codes = \App\CodeEntry::orderBy('id','DESC')->get();
         $approved = \App\Approval::orderBy('id','DESC')->get();
         $testrun = \App\TestRun::orderBy('id','DESC')->get();
+        $users = \App\User::orderBy('id','DESC')->get();
+        $user_names = [];
+        foreach($users as $user) {
+            $user_names[$user->id] = $user->name;
+        }
+
         //dd($monitor);
         //dd($approved);
         //dd($testrun);
@@ -37,7 +45,29 @@ class MonitorController extends Controller {
         //    echo $m['id']. ", " . $m['last_sha']. ", " .$m['comments'] ."<br>";
         //}
             //dump($monitor->toArray());
-        return view('monitor.index')->with('codes',$codes);
+        return view('monitor.index')->with('codes',$codes)->with('user_names', $user_names);
+    }
+
+    public function inputSelector() {
+        //http://p4/input?code=1&type=1&id=1
+
+        $code_id = (\Input::get('code'));
+        \Session::put('code_id', $code_id);
+        $id = null;
+        switch(\Input::get('type'))
+        {
+            case 1:
+                $id = \Input::get('id');
+                return redirect('/monitor/createupdateapproval/'.$id);
+                break;
+            case 2:
+                $id = \Input::get('id');
+                return redirect('/monitor/createupdatetest/'.$id);
+                break;
+        }
+        //dump(\Input::all());
+        return;
+
     }
 
     /**
@@ -48,7 +78,11 @@ class MonitorController extends Controller {
         $code = \App\CodeEntry::find($id);
         $test = \App\TestRun::orderby('id','ASC')->get();
         $approval = \App\Approval::orderby('id','ASC')->get();
-
+        $users = \App\User::orderBy('id','DESC')->get();
+        $user_names = [];
+        foreach($users as $user) {
+            $user_names[$user->id] = $user->name;
+        }
         \Session::put('code_id',$id);
         //dump(\Session::get('code_id'));
 
@@ -57,7 +91,9 @@ class MonitorController extends Controller {
             return redirect('/monitor');
         }
         //$request->session()->put('code_id',$id);
-        return view('monitor.createupdatecode')->with('code', $code);
+
+        //dump($user);
+        return view('monitor.createupdatecode')->with('code', $code)->with('user_names', $user_names);
     }
 
     public function postCodeCreateUpdate(Request $request) {
@@ -67,6 +103,7 @@ class MonitorController extends Controller {
         $code->branch_name = $request->branch_name;
         $code->last_sha = $request->last_sha;
         $code->comments = $request->comments;
+        $code->developer = \Auth::id();
         $code->save();
 
         \Session::flash('flash_message','Your code monitor was updated.');
@@ -81,15 +118,20 @@ class MonitorController extends Controller {
         }else {
             $test = \App\TestRun::find($id);
         }
+        $users = \App\User::orderBy('id','DESC')->get();
+        $user_names = [];
+        foreach($users as $user) {
+            $user_names[$user->id] = $user->name;
+        }
         //$test = \App\TestRun::find($id);
         //$code = \App\CodeEntry::find(\Session::id);
-
+        //echo (\App\User::find($test->tester_id));
         if(is_null($test)) {
             \Session::flash('flash_message','Test not found.');
             return redirect('/monitor');
         }
 
-        return view('monitor.createupdatetest')->with('test', $test);
+        return view('monitor.createupdatetest')->with('test', $test)->with('user_names', $user_names);
     }
 
     public function postTestCreateUpdate(Request $request) {
@@ -105,6 +147,7 @@ class MonitorController extends Controller {
         $test->passed = $request->passed;
         $test->comments = $request->comments;
         $test->merged_up_to_master = $request->merged;
+        $test->tester_id = \Auth::id();
         $test->save();
 
         $code = \App\CodeEntry::find(\Session::get('code_id'));
@@ -124,13 +167,17 @@ class MonitorController extends Controller {
         }else {
             $approval = \App\Approval::find($id);
         }
-
+        $users = \App\User::orderBy('id','DESC')->get();
+        $user_names = [];
+        foreach($users as $user) {
+            $user_names[$user->id] = $user->name;
+        }
         if(is_null($approval)) {
             \Session::flash('flash_message','Approval not found.');
             return redirect('/monitor');
         }
 
-        return view('monitor.createupdateapproval')->with('approval', $approval);
+        return view('monitor.createupdateapproval')->with('approval', $approval)->with('user_names', $user_names);
     }
 
     public function postApprovalCreateUpdate(Request $request) {
@@ -145,6 +192,7 @@ class MonitorController extends Controller {
         //$approval = \App\Approval::find($request->id);
 
         $approval->comments = $request->comments;
+        $approval->approver_id = \Auth::id();
         $approval->save();
 
         $code = \App\CodeEntry::find(\Session::get('code_id'));

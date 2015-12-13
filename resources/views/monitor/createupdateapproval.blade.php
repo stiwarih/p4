@@ -10,7 +10,9 @@
     <h1>Edit Approval</h1>
 
     @include('errors')
-
+    <div>
+    Approver:{{$user_names[$approval->approver_id]}}
+    </div>
     <form method='POST' action='/monitor/createupdateapproval'>
 
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>

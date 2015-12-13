@@ -10,7 +10,9 @@
     <h1>Edit</h1>
 
     @include('errors')
-
+    <div>
+    Tester:{{$user_names[$test->tester_id]}}
+    </div>
     <form method='POST' action='/monitor/createupdatetest'>
 
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>

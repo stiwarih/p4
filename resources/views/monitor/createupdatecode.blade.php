@@ -10,7 +10,9 @@
     <h1>Edit</h1>
 
     @include('errors')
-
+    <div>
+    Developer:{{$user_names[$code->developer]}}
+    </div>
     <form method='POST' action='/monitor/createupdatecode'>
 
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>
