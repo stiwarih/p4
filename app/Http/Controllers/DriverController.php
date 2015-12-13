@@ -8,11 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class DriverController extends Controller {
 
-		public function restControl()
-		{
-			return $this->obtain_thejoson();
-		}
-
 		private $special_chars = array( "(",  "!",  "@",  "#", "$", "%", "^", "&", "+", "=", "-",  "_",  "'",  "\"",  "/",  "\\",  "?",  "<",  ">",  ")" );
 		private $use_number = 0;
 		private $use_spl_chars = 0;
@@ -42,11 +37,6 @@ class DriverController extends Controller {
 
 		public function goPassPost(Request $request = null)
 		{
-			/*
-			$this->validate($request, [
-	        'passwords' => 'required|min:3',
-	    ]);
-			*/
 
 			$num_pass 							= $request->input('passwords');
 			//if($num_pass > 9) die('User count too high');

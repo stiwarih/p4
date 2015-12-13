@@ -13,7 +13,7 @@ li {
     <h1>All Code Entries</h1>
     @foreach($codes as $code)
         <div>
-            <h2><a href='/monitor/createupdatecode/{{$code->id}}'>{{ $code->branch_name }}</a></h2>
+            <h3><a href='/monitor/createupdatecode/{{$code->id}}'>{{ $code->branch_name }} | Edit</a></h3>
             <div>
             <ul>
                 <li>Developer:[{{$user_names[$code->developer]}}]</li>

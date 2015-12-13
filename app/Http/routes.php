@@ -60,9 +60,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/monitor/createupdateapproval/{id?}',   'MonitorController@getApprovalCreateUpdate');
     Route::post('/monitor/createupdateapproval',        'MonitorController@postApprovalCreateUpdate');
     Route::get('/input',                                'MonitorController@inputSelector');
-
-    Route::get('/monitor/create',      'MonitorController@getCreate');
-    Route::post('/monitor/create',     'MonitorController@postCreate');
+    Route::get('/monitor/create',                       'MonitorController@getCreate');
+    Route::post('/monitor/create',                      'MonitorController@postCreate');
+    Route::get('/monitor/approvalconfirm-delete/{id?}', 'MonitorController@getConfirmDelete');
+    Route::get('/monitor/approvaldelete/{id?}',         'MonitorController@getDoDelete');
 
 });
 

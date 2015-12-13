@@ -10,9 +10,9 @@
     <h1>Edit Approval</h1>
 
     @include('errors')
-    <div>
-    Approver:'{{($approval->exists == false)?'':$user_names[$approval->approver_id]}}'
-    </div>
+    <h3>
+        Approver : {{($approval->exists == false)?'':$user_names[$approval->approver_id]}}
+    </h3>
     <form method='POST' action='/monitor/createupdateapproval'>
 
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>
@@ -34,7 +34,7 @@
 
     <nav>
         <ul>
-            <li><a href='/monitor/createupdatecode/{{\Session::get('code_id')}}'><<<=Go back to Code details</a></li>
+            <li><a href='/monitor/createupdatecode/{{\Session::get('code_id')}}'><<<=Go back to Code Details</a></li>
         </ul>
     </nav>
 

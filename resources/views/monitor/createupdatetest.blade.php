@@ -7,12 +7,12 @@
 
 @section('content')
 
-    <h1>Edit Test Deatils</h1>
+    <h1>Edit Test Details</h1>
 
     @include('errors')
-    <div>
-    Tester:{{($test->exists == false)?'':$user_names[$test->tester_id]}}
-    </div>
+    <h3>
+        Tester : {{($test->exists == false)?'':$user_names[$test->tester_id]}}
+    </h3>
     <form method='POST' action='/monitor/createupdatetest'>
 
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>
@@ -54,7 +54,7 @@
 
     <nav>
         <ul>
-            <li><a href='/monitor/createupdatecode/{{\Session::get('code_id')}}'><<<=Go back to Code details</a></li>
+            <li><a href='/monitor/createupdatecode/{{\Session::get('code_id')}}'><<<=Go back to Code Details</a></li>
         </ul>
     </nav>
 
