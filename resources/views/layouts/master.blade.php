@@ -43,7 +43,7 @@
             @if(Auth::check())
                 <li><a href='/monitor'>Home</a></li>
                 <li><a href='/monitor/create'>Add a code branch for Qualification</a></li>
-                <li><a href='/logout'>Log out</a></li>
+                <li><a href='/logout'>Log out {{ $user->name }} </a></li>
             @else
                 <li><a href='/'>Home</a></li>
                 <li><a href='/login'>Log in</a></li>
