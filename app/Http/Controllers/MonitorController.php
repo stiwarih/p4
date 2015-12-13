@@ -207,6 +207,40 @@ class MonitorController extends Controller {
     }
 
     /**
+	*
+	*/
+    public function getConfirmDeleteApproval($id) {
+
+        $approval = \App\Approval::find($id);
+
+        return view('monitor.deleteapproval')->with('approval', $approval);
+    }
+
+    /**
+	*
+	*/
+    public function getDoDeleteApproval($id) {
+
+        $approval = \App\Approval::find($id);
+
+        if(is_null($approval)) {
+            \Session::flash('flash_message','Approval not found.');
+            return redirect('\monitor');
+        }
+
+        $approval->delete();
+
+        $code = \App\CodeEntry::find(\Session::get('code_id'));
+        $code->approval_id = 0;
+        $code->save();
+
+        \Session::flash('flash_message',$approval->comments.' was deleted.');
+
+        return redirect('/monitor');
+
+    }
+
+    /**
      * Responds to requests to GET /monitor/show/{branch_name}
      */
     public function getShow($title = null) {

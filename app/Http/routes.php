@@ -62,8 +62,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/input',                                'MonitorController@inputSelector');
     Route::get('/monitor/create',                       'MonitorController@getCreate');
     Route::post('/monitor/create',                      'MonitorController@postCreate');
-    Route::get('/monitor/approvalconfirm-delete/{id?}', 'MonitorController@getConfirmDelete');
-    Route::get('/monitor/approvaldelete/{id?}',         'MonitorController@getDoDelete');
+    Route::get('/monitor/confirm-deleteapproval/{id?}', 'MonitorController@getConfirmDeleteApproval');
+    Route::get('/monitor/deleteapproval/{id?}',         'MonitorController@getDoDeleteApproval');
 
 });
 

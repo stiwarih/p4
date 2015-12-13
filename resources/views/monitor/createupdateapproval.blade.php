@@ -8,7 +8,7 @@
 @section('content')
 
     <h1>Edit Approval</h1>
-
+    <a href='/monitor/confirm-deleteapproval/{{$approval->id}}'>Delete</a><br>
     @include('errors')
     <h3>
         Approver : {{($approval->exists == false)?'':$user_names[$approval->approver_id]}}
