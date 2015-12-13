@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://foobooks.com'),
+    'url' => env('APP_URL', 'http://p4.stiwari.me'),
 
     /*
     |--------------------------------------------------------------------------
@@ -145,7 +145,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Barryvdh\Debugbar\ServiceProvider::class,
+        //Barryvdh\Debugbar\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         'App\Providers\ComposerUserProvider'

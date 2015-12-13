@@ -15,20 +15,6 @@ class MonitorController extends Controller {
     * Responds to requests to GET /monitor
     */
     public function getIndex(Request $request) {
-        /*
-        $monitor = \DB::table('code_entries')->get();
-        return view('monitor.index2')->with('branch_names',$monitor);
-        */
-        /*
-        $monitor = \DB::table('code_entries')->get();
-        dd($monitor);
-        foreach($monitor as $m) {
-            echo $m[0]."<br>";
-        }
-        return 'hi';
-        */
-
-        //\Session::put('user_id', \Auth::id());
         $codes = \App\CodeEntry::orderBy('id','DESC')->get();
         $approved = \App\Approval::orderBy('id','DESC')->get();
         $testrun = \App\TestRun::orderBy('id','DESC')->get();
@@ -38,18 +24,10 @@ class MonitorController extends Controller {
             $user_names[$user->id] = $user->name;
         }
 
-        //dd($monitor);
-        //dd($approved);
-        //dd($testrun);
-        //foreach($branches as $m) {
-        //    echo $m['id']. ", " . $m['last_sha']. ", " .$m['comments'] ."<br>";
-        //}
-            //dump($monitor->toArray());
         return view('monitor.index')->with('codes',$codes)->with('user_names', $user_names);
     }
 
     public function inputSelector() {
-        //http://p4/input?code=1&type=1&id=1
 
         $code_id = (\Input::get('code'));
         \Session::put('code_id', $code_id);
@@ -68,9 +46,8 @@ class MonitorController extends Controller {
                 return redirect($url);
                 break;
         }
-        //dump(\Input::all());
-        return;
-
+        \Session::flash('flash_message','No such data found.');
+        return redirect('/monitor');
     }
 
     /**
@@ -87,15 +64,11 @@ class MonitorController extends Controller {
             $user_names[$user->id] = $user->name;
         }
         \Session::put('code_id',$id);
-        //dump(\Session::get('code_id'));
 
         if(is_null($code)) {
             \Session::flash('flash_message','Code Entry not found.');
             return redirect('/monitor');
         }
-        //$request->session()->put('code_id',$id);
-
-        //dump($user);
         return view('monitor.createupdatecode')->with('code', $code)->with('user_names', $user_names);
     }
 
@@ -126,9 +99,6 @@ class MonitorController extends Controller {
         foreach($users as $user) {
             $user_names[$user->id] = $user->name;
         }
-        //$test = \App\TestRun::find($id);
-        //$code = \App\CodeEntry::find(\Session::id);
-        //echo (\App\User::find($test->tester_id));
         if(is_null($test)) {
             \Session::flash('flash_message','Test not found.');
             return redirect('/monitor');
@@ -144,8 +114,6 @@ class MonitorController extends Controller {
         }else {
             $test = \App\TestRun::find($request->id);
         }
-
-        //$test = \App\TestRun::find($request->id);
 
         $test->passed = $request->passed;
         $test->comments = $request->comments;
@@ -192,8 +160,6 @@ class MonitorController extends Controller {
             $approval = \App\Approval::find($request->id);
         }
 
-        //$approval = \App\Approval::find($request->id);
-
         $approval->comments = $request->comments;
         $approval->approver_id = \Auth::id();
         $approval->save();
@@ -204,46 +170,6 @@ class MonitorController extends Controller {
 
         \Session::flash('flash_message','Your Approval was updated.');
         return redirect('/monitor/createupdateapproval/'.$approval->id);
-
-    }
-
-    public function getEdit($id = null) {
-
-        $branch = \App\CodeEntry::find($id);
-        $authors = \App\Author::orderby('last_name','ASC')->get();
-
-
-        return view('monitor.edit');
-
-        $book = \App\Book::find($id);
-
-        $authors = \App\Author::orderby('last_name','ASC')->get();
-
-        $authors_for_dropdown = [];
-        foreach($authors as $author) {
-            $authors_for_dropdown[$author->id] = $author->last_name.', '.$author->first_name;
-        }
-
-        dump($authors_for_dropdown);
-
-        if(is_null($book)) {
-            \Session::flash('flash_message','Book not found.');
-            return redirect('\books');
-        }
-
-        return view('books.edit')->with(['book'=>$book, 'authors_for_dropdown' => $authors_for_dropdown]);
-
-    }
-
-    /**
-    * Responds to requests to POST /monitor/edit
-    */
-    public function postEdit(Request $request) {
-
-
-        \Session::flash('flash_message','Your code monitor was updated.');
-        return redirect('/monitor/edit/'.$request->id);
-
     }
 
     /**
@@ -262,7 +188,7 @@ class MonitorController extends Controller {
         $this->validate(
             $request,
             [
-                'branch_name' => 'required|min:5',
+                'branch_name' => 'required|min:3',
                 'last_sha' =>    'required|min:6',
             ]
         );

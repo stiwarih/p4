@@ -32,4 +32,10 @@
         <button type="submit" class="btn btn-primary">Save changes</button>
     </form>
 
+    <nav>
+        <ul>
+            <li><a href='/monitor/createupdatecode/{{\Session::get('code_id')}}'><<<=Go back to Code details</a></li>
+        </ul>
+    </nav>
+
 @stop

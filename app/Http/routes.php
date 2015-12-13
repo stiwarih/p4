@@ -61,12 +61,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/monitor/createupdateapproval',        'MonitorController@postApprovalCreateUpdate');
     Route::get('/input',                                'MonitorController@inputSelector');
 
-    
-    //in theory
     Route::get('/monitor/create',      'MonitorController@getCreate');
     Route::post('/monitor/create',     'MonitorController@postCreate');
-    //Route::get('/monitor/edit/{id?}',  'MonitorController@getEdit');
-    Route::post('/monitor/edit',       'MonitorController@postEdit');
 
 });
 

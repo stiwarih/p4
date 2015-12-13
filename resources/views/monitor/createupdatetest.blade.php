@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <h1>Edit</h1>
+    <h1>Edit Test Deatils</h1>
 
     @include('errors')
     <div>
@@ -51,5 +51,11 @@
         <br>
         <button type="submit" class="btn btn-primary">Save changes</button>
     </form>
+
+    <nav>
+        <ul>
+            <li><a href='/monitor/createupdatecode/{{\Session::get('code_id')}}'><<<=Go back to Code details</a></li>
+        </ul>
+    </nav>
 
 @stop
