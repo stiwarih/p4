@@ -17,8 +17,8 @@ li {
             <div>
             <ul>
                 <li>Developer:[{{$user_names[$code->developer]}}]</li>
-                <li><a href='/input?code={{$code->id}}&type=1&id={{$code->approval_id}}'>Aprroval</a></li>
-                <li><a href='/input?code={{$code->id}}&type=2&id={{$code->test_run_id}}'>Tested</a><br></li>
+                <li><a href='/input?code={{$code->id}}&type=1&id={{$code->approval_id}}'>{{($code->approval_id > 0)? 'Approved': 'Not Approved'}}</a></li>
+                <li><a href='/input?code={{$code->id}}&type=2&id={{$code->test_run_id}}'>{{($code->test_run_id > 0)? 'Tested': 'Not Tested'}}</a><br></li>
                 {{--    <li><a href='/monitor/createupdateapproval/{{$code->approval_id}}'>Aprroval</a></li>    --}}
                 {{--    <li><a href='/monitor/createupdatetest/{{$code->test_run_id}}'>Tested</a><br></li>  --}}
             </ul>

@@ -13,6 +13,12 @@
     <div>
     Developer:{{$user_names[$code->developer]}}
     </div>
+    <div>
+    <ul>
+        <li><a href='/input?code={{$code->id}}&type=1&id={{$code->approval_id}}'>{{($code->approval_id > 0)? 'Approved': 'Not Approved'}}</a></li>
+        <li><a href='/input?code={{$code->id}}&type=2&id={{$code->test_run_id}}'>{{($code->test_run_id > 0)? 'Tested': 'Not Tested'}}</a><br></li>
+    </ul>
+    </div>
     <form method='POST' action='/monitor/createupdatecode'>
 
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>

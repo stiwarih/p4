@@ -27,88 +27,34 @@ such as a page specific styesheets.
         <input type='hidden' value='{{ csrf_token() }}' name='_token'>
 
         <div class='form-group'>
-            <label>* Title:</label>
+            <label>* Branch Name:</label>
             <input
                 type='text'
-                id='title'
-                name='title'
-                value='{{ old('title','Green Eggs & Ham') }}'
+                id='branch_name'
+                name='branch_name'
+                value='{{ old('branch_name','feature_10') }}'
             >
         </div>
 
         <div class='form-group'>
-            <label for='title'>* Author:</label>
+            <label for='last_sha'>* Last Sha:</label>
             <input
                 type='text'
-                id='author'
-                name="author"
-                value='{{ old('author','Dr. Seuss') }}'
-            >
-        </div>
-
-        <div class='form-group'>
-            <label for='title'>* Cover (URL):</label>
-            <input
-                type='text'
-                id='cover'
-                name="cover"
-                value='{{ old('cover','http://prodimage.images-bn.com/pimages/9780394800165_p0_v4_s118x184.jpg') }}'
+                id='last_sha'
+                name="last_sha"
+                value='{{ old('last_sha','A1B1C1D1E1F10') }}'
                 >
         </div>
 
         <div class='form-group'>
-            <label for='Published'>Published (YYYY):</label>
+            <label for='comments'>Comments:</label>
             <input
                 type='text'
-                id='published'
-                name="published"
-                value='{{ old('published','1960') }}'
+                id='comments'
+                name="comments"
+                value='{{ old('comments','This is comment for feature 10') }}'
                 >
         </div>
-
-        <div class='form-group'>
-            <label for='title'>* URL To purchase this book:</label>
-            <input
-                type='text'
-                id='purchase_link'
-                name='purchase_link'
-                value='{{ old('purchase_link','http://www.barnesandnoble.com/w/green-eggs-and-ham-dr-seuss/1100170349?ean=9780394800165') }}'
-                >
-        </div>
-
-
-
-//
-<input type='hidden' name='id' value='{{ $code->id }}'>
-<div class='form-group'>
-    <label>* Branch Name:</label>
-    <input
-        type='text'
-        id='branch_name'
-        name='branch_name'
-        value='{{$code->branch_name}}'
-    >
-</div>
-
-<div class='form-group'>
-    <label for='last_sha'>* Last Sha:</label>
-    <input
-        type='text'
-        id='last_sha'
-        name="last_sha"
-        value='{{$code->last_sha}}'
-        >
-</div>
-
-<div class='form-group'>
-    <label for='comments'>Comments:</label>
-    <input
-        type='text'
-        id='comments'
-        name="comments"
-        value='{{$code->comments}}'
-        >
-</div>
 
         <button type="submit" class="btn btn-primary">Add Code Entry</button>
     </form>

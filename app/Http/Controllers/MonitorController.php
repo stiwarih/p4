@@ -53,16 +53,19 @@ class MonitorController extends Controller {
 
         $code_id = (\Input::get('code'));
         \Session::put('code_id', $code_id);
-        $id = null;
+        $id = \Input::get('id');
+        $url = null;
         switch(\Input::get('type'))
         {
             case 1:
-                $id = \Input::get('id');
-                return redirect('/monitor/createupdateapproval/'.$id);
+                $url = '/monitor/createupdateapproval/';
+                $url .= ($id > 0 )? $id : '';
+                return redirect($url);
                 break;
             case 2:
-                $id = \Input::get('id');
-                return redirect('/monitor/createupdatetest/'.$id);
+                $url = '/monitor/createupdatetest/';
+                $url .= ($id > 0 )? $id : '';
+                return redirect($url);
                 break;
         }
         //dump(\Input::all());
@@ -247,6 +250,7 @@ class MonitorController extends Controller {
      * Responds to requests to GET /monitor/create
      */
     public function getCreate() {
+
         return view('monitor.create');
     }
 
@@ -255,8 +259,23 @@ class MonitorController extends Controller {
      */
     public function postCreate(Request $request) {
 
-        \Session::flash('flash_message','Your monitor was added!');
+        $this->validate(
+            $request,
+            [
+                'branch_name' => 'required|min:5',
+                'last_sha' =>    'required|min:6',
+            ]
+        );
 
+        # Enter Code into the database
+        $code = new \App\CodeEntry();
+        $code->branch_name = $request->branch_name;
+        $code->last_sha = $request->last_sha;
+        $code->comments = $request->comments;
+        $code->developer = \Auth::id();
+        $code->save();
+
+        \Session::flash('flash_message','Your monitor was added!');
         return redirect('/monitor');
 
     }
