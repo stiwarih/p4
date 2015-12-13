@@ -75,11 +75,15 @@ class MonitorController extends Controller {
     }
 
     public function getTestCreateUpdate($id = null) {
-
-        $test = \App\TestRun::find($id);
+        $test = null;
+        if($id == null){
+            $test = new \App\TestRun();
+        }else {
+            $test = \App\TestRun::find($id);
+        }
+        //$test = \App\TestRun::find($id);
         //$code = \App\CodeEntry::find(\Session::id);
 
-        //dump(\Session::get('code_id'));
         if(is_null($test)) {
             \Session::flash('flash_message','Test not found.');
             return redirect('/monitor');
@@ -89,8 +93,14 @@ class MonitorController extends Controller {
     }
 
     public function postTestCreateUpdate(Request $request) {
+        $test = null;
+        if($request->id == null){
+            $test = new \App\TestRun();
+        }else {
+            $test = \App\TestRun::find($request->id);
+        }
 
-        $test = \App\TestRun::find($request->id);
+        //$test = \App\TestRun::find($request->id);
 
         $test->passed = $request->passed;
         $test->comments = $request->comments;
@@ -98,17 +108,22 @@ class MonitorController extends Controller {
         $test->save();
 
         $code = \App\CodeEntry::find(\Session::get('code_id'));
-        $code->test_run_id = $request->id;
+        $code->test_run_id = $test->id;
         $code->save();
 
         \Session::flash('flash_message','Your Test was updated.');
-        return redirect('/monitor/createupdatetest/'.$request->id);
+        return redirect('/monitor/createupdatetest/'.$test->id);
 
     }
 
     public function getApprovalCreateUpdate($id = null) {
 
-        $approval = \App\Approval::find($id);
+        $approval = null;
+        if($id == null){
+            $approval = new \App\Approval();
+        }else {
+            $approval = \App\Approval::find($id);
+        }
 
         if(is_null($approval)) {
             \Session::flash('flash_message','Approval not found.');
@@ -120,17 +135,24 @@ class MonitorController extends Controller {
 
     public function postApprovalCreateUpdate(Request $request) {
 
-        $approval = \App\Approval::find($request->id);
+        $approval = null;
+        if($request->id == null){
+            $approval = new \App\Approval();
+        }else {
+            $approval = \App\Approval::find($request->id);
+        }
+
+        //$approval = \App\Approval::find($request->id);
 
         $approval->comments = $request->comments;
         $approval->save();
 
         $code = \App\CodeEntry::find(\Session::get('code_id'));
-        $code->approval_id = $request->id;
+        $code->approval_id = $approval->id;
         $code->save();
 
         \Session::flash('flash_message','Your Approval was updated.');
-        return redirect('/monitor/createupdateapproval/'.$request->id);
+        return redirect('/monitor/createupdateapproval/'.$approval->id);
 
     }
 
