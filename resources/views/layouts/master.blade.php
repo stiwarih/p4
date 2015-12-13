@@ -41,8 +41,8 @@
     <nav>
         <ul>
             @if(Auth::check())
-                <li><a href='/'>Home</a></li>
-                <li><a href='/branch/create'>Add a code branch for Qualification</a></li>
+                <li><a href='/monitor'>Home</a></li>
+                <li><a href='/monitor/create'>Add a code branch for Qualification</a></li>
                 <li><a href='/logout'>Log out</a></li>
             @else
                 <li><a href='/'>Home</a></li>

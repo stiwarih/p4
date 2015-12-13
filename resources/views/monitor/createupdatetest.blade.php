@@ -11,7 +11,7 @@
 
     @include('errors')
     <div>
-    Tester:{{$user_names[$test->tester_id]}}
+    Tester:{{($test->exists == false)?'':$user_names[$test->tester_id]}}
     </div>
     <form method='POST' action='/monitor/createupdatetest'>
 

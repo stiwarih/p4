@@ -11,7 +11,7 @@
 
     @include('errors')
     <div>
-    Approver:{{$user_names[$approval->approver_id]}}
+    Approver:'{{($approval->exists == false)?'':$user_names[$approval->approver_id]}}'
     </div>
     <form method='POST' action='/monitor/createupdateapproval'>
 
