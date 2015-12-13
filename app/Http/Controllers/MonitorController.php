@@ -108,6 +108,14 @@ class MonitorController extends Controller {
     }
 
     public function postTestCreateUpdate(Request $request) {
+
+        $this->validate(
+            $request,
+            [
+                'comments' => 'required|min:3',
+            ]
+        );
+
         $test = null;
         if($request->id == null){
             $test = new \App\TestRun();
@@ -152,6 +160,13 @@ class MonitorController extends Controller {
     }
 
     public function postApprovalCreateUpdate(Request $request) {
+
+        $this->validate(
+            $request,
+            [
+                'comments' => 'required|min:3',
+            ]
+        );
 
         $approval = null;
         if($request->id == null){
