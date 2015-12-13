@@ -7,18 +7,12 @@
 <https://github.com/stiwarih/p4>
 
 ## Description
-This provide access to two popular tools for Random Text and User generator using configurable inputs. In addition a third tool provide user an easy access to random user.
+Like a typical development project this site gives it's users ability to manage the code release and monitor code quality. It assumes three types of roles, namely a Developer, a Tester and a Release Manager, who examines code and the test run to approve the code for release quality.
 
 ## Demo
-<http://screencast.com/t/HkwvUEzS6pv>
+<http://screencast.com/t/DNzogIEXkmao>
 
 ## Details for teaching team
-No login required.
+Three logins are provided with pre-seeded data. Jill, Jamal and Sanjay, their passwords are 'helloworld'. Alternatively one can sign up and assume any of these roles.
 
 ## Outside code
-
-Random text: https://packagist.org/packages/badcow/lorem-ipsum
-             https://github.com/Badcow/LoremIpsum
-Random User: https://packagist.org/packages/fzaninotto/faker
-             https://github.com/fzaninotto/Faker
-Single User API: https://randomapi.com/
